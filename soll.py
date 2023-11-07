@@ -2,7 +2,7 @@
 import ast, os, textwrap
 from datetime import datetime, date, timedelta
 
-versie = "0.75"
+versie = "0.76"
 datum = "20231107"
 plaats = "Pedara"
 
@@ -300,7 +300,50 @@ def chsoll():
         try:
             intd = int(details)
             if intd in range(len(lijst)):
-                lijst = lssoll(intd)
+                lijn = "-"*2+"+"+"-"*9+"+"+"-"*10+" -   -"
+                lijst = lslijst()
+                print(col+lijn+col0)
+                col = col0
+                for j in range(len(lijstlijst)):
+                    if j in [1,2,6,7,9]:
+                        if len(lijst[intd][j]) > 40:
+                            w = textwrap.wrap(lijst[intd][j], width = 40)
+                            for k in w:
+                                if k == w[0]:
+                                    print(forc3(j)+forl10(lijstlijst[j])+k)
+                                else:
+                                    print(" "*13+k)
+                        else:
+                            print(forc3(j)+forl10(lijstlijst[j])+str(lijst[intd][j]))
+                    elif j == 8:
+                        if len(lijst[intd][j]) > 40:
+                            w = lijst[intd][j].split("/")
+                            for k in w:
+                                if k == w[0]:
+                                    print(forc3(j)+forl10(lijstlijst[j])+k+"/")
+                                elif len(k) > 40:
+                                    l = textwrap.wrap(k, width = 40)
+                                    for m in l:
+                                        print(" "*13+m)
+                                    print(" "*13+"/")
+                                else:
+                                    print(" "*13+k+"/")
+                        else:
+                            print(forc3(j)+forl10(lijstlijst[j])+str(lijst[intd][j]))
+                    else:
+                        if j == 5:
+                            col = statcollijst[statuslijst.index(lijst[intd][j])]
+                            print(forc3(j)+forl10(lijstlijst[j])+col+str(lijst[intd][j])+col0)
+                            col = col0
+                        elif j == 3:
+                            if lijst[intd][j] == 0:
+                                lijst[intd][j] = ""
+                            print(forc3(j)+forl10(lijstlijst[j])+col+str(lijst[intd][j])+col0)
+                        else:
+                            print(forc3(j)+forl10(lijstlijst[j])+col+str(lijst[intd][j])+col0)
+                col = colch
+                print(col+lijn+col0)
+            if intd in range(len(lijst)):
                 anders = input("Welk veld wil je %sWIJZIGEN%s:\n%s" % (col,col0,inputindent))
                 if anders.upper() in afsluitlijst:
                     return lijst
@@ -328,8 +371,6 @@ def chsoll():
                                 Dat = datetime.strptime(wijz,"%Y%m%d")
                             if inta == 3:
                                 Sal = int(wijz)
-                            if wijz == "":
-                                wijz = "."
                         lijst[intd][inta] = wijz
                         with open("lijst","w") as l:
                             print(lijst,end = "", file = l)
@@ -337,7 +378,7 @@ def chsoll():
                     #print(f)
                     pass
         except(Exception) as f:
-            #print(f)
+            print(f)
             ch = False
             pass
     col = col0
