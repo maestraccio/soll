@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 import ast, os, textwrap
 from datetime import datetime, date, timedelta
+from time import sleep
 
-versie = "0.76"
+versie = "0.77"
 datum = "20231107"
 plaats = "Pedara"
 
@@ -32,8 +33,18 @@ statuslijst = ["Open","Actief","Dicht"]
 statcollijst = [colStart,colOpen,colDicht]
 lijstlijst = ["Datum","Functie","Bedrijf","Salaris","Gewijzigd","Status","Contact","Via","Weblink","Notitie"]
 #              0       1         2         3         4           5        6         7     8         9
-
-logo = "S O L L   n i e t   m e t   m e !"
+#  _    __  __   __
+# / \\ / \\ ||   ||
+#\\__ ||  ||||   ||
+#   \\||  ||||   ||
+#\\__/ \\_/ /\_/|/\_/| niet met me!
+#
+logo = """
+  _    __  __   __  
+ / \\\\ / \\\\ ||   ||  
+\\\\__ ||  ||||   ||  
+   \\\\||  ||||   ||  
+\\\\__/ \\\\_/ /\_/|/\_/| niet met me!"""
 print()
 lenlijst = 0
 try:
@@ -42,6 +53,7 @@ try:
             print(i, end = "")
             print(logo[statcollijst.index(i)+lenlijst], end = "", flush = True)
             logo = logo[0:]
+            sleep(0.01)
         lenlijst += len(statcollijst)
 except:
     print(col0)
