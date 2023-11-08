@@ -3,7 +3,7 @@ import ast, os, textwrap
 from datetime import datetime, date, timedelta
 from time import sleep
 
-versie = "0.79"
+versie = "0.80"
 datum = "20231108"
 plaats = "Pedara"
 
@@ -22,9 +22,9 @@ colls = "\033[93m"
 colch = "\033[96m"
 colrm = "\033[91m"
 colfd = "\033[95m"
-colStart = "\033[44m"+"\033[95m"
-colOpen = "\033[103m"+"\033[94m"
-colDicht = "\033[41m"+"\033[96m"
+colStart = "\033[95m"+"\033[44m"
+colOpen = "\033[94m"+"\033[103m"
+colDicht = "\033[96m"+"\033[41m"
 
 
 inputindent = "  : "
@@ -33,30 +33,29 @@ statuslijst = ["Open","Actief","Dicht"]
 statcollijst = [colStart,colOpen,colDicht]
 lijstlijst = ["Datm","Func","Bedr","Loon","Wijz","Stts","Pers","Cont","Webl","Aant"]
 #              0      1      2      3      4      5      6      7      8      9
-#  __   __  __   __
-# / \\ / \\ ||   ||
-#\\__ ||  ||||   ||
-#   \\||  ||||   ||
-#\\__/ \\_/ /\_/|/\_/| niet met me!
+# ___   ___  __   __
+#/  \\ /  \\ ||   ||
+#\\__ ||   ||||   ||
+#   \\||   ||||   ||
+#\\__/ \\__/ /\_/|/\_/| niet met me!
 #
 logo = """
-  __   __  __   __  
- / \\\\ / \\\\ ||   ||  
-\\\\__ ||  ||||   ||  
-   \\\\||  ||||   ||  
-\\\\__/ \\\\_/ /\_/|/\_/| niet met me!"""
-lenlijst = 0
-try:
-    while len(logo) > 0:
-        for i in statcollijst:
-            print(i, end = "")
-            print(logo[statcollijst.index(i)+lenlijst], end = "", flush = True)
-            logo = logo[0:]
-            sleep(0.01)
-        lenlijst += len(statcollijst)
-except:
-    print(col0)
+ ___   ___  __   __ 
+/  \\\\ /  \\\\ ||   || 
+\\\\__ ||   ||||   || 
+   \\\\||   ||||   || 
+\\\\__/ \\\\__/ /\_/|/\_/| niet met me!"""
+colin = 0
+for i in logo:
+    print(statcollijst[colin]+i+col0, end = "", flush = True)
+    if colin == len(statcollijst)-1:
+        colin = 0
+    else:
+        colin += 1
+    sleep(0.01)
+print(col0)
 print()
+
 
 def lslijst():
     ls = os.listdir()
