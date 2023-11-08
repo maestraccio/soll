@@ -3,8 +3,8 @@ import ast, os, textwrap
 from datetime import datetime, date, timedelta
 from time import sleep
 
-versie = "0.77"
-datum = "20231107"
+versie = "0.78"
+datum = "20231108"
 plaats = "Pedara"
 
 basismap = os.path.dirname(os.path.realpath(__file__))
@@ -187,7 +187,7 @@ def lsls():
     lijn5 = forr5("-- +")
     lijn = lijn3+lijn5*10
     lijst = lslijst()
-    print(" "*(3+5*5-len("Statusopties: "))+"Statusopties: %s %s %s" % (statcollijst[0]+statuslijst[0]+col0,statcollijst[1]+statuslijst[1]+col0,statcollijst[2]+statuslijst[2]+col0))
+    print("Statusopties: %s %s %s" % (statcollijst[0]+statuslijst[0]+col0,statcollijst[1]+statuslijst[1]+col0,statcollijst[2]+statuslijst[2]+col0))
     print(col+lijn+col0)
     print(forc3("-"), end = "")
     for i in lijstlijst:
@@ -218,7 +218,13 @@ def lsls():
 def rgsoll():
     lijst = lslijst()
     rgs = []
-    details = input()
+    Geef = "Geef de index op als geheel getal (\"#\"), inclusief bereik (\":#\", \"#:#\" of \"#:\") of lijst (\"#,#,#\")"
+    twGeef = textwrap.wrap(Geef, width = 53)
+    ix = 0
+    while ix < len(twGeef)-1:
+        print(twGeef[ix])
+        ix += 1
+    details = input(twGeef[-1]+inputindent)
     try:
         if ":" in details:
             if len(details) >1 and details[0] == ":":
@@ -417,7 +423,7 @@ def rmsoll():
 def fdsoll():
     col = colfd
     lijst = lslijst()
-    fd = input("Geef de %sZOEKREEKS%s op (zoeken in ieder veld):\n%s" % (col,col0,inputindent))
+    fd = input("Geef de %sZOEKREEKS%s op:\n%s" % (col,col0,inputindent))
     if fd.upper() in afsluitlijst:
         return lijst
     elif fd == "":
