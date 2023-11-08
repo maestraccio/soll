@@ -3,7 +3,7 @@ import ast, os, textwrap
 from datetime import datetime, date, timedelta
 from time import sleep
 
-versie = "0.78"
+versie = "0.79"
 datum = "20231108"
 plaats = "Pedara"
 
@@ -31,21 +31,20 @@ inputindent = "  : "
 afsluitlijst = ["X","Q"]
 statuslijst = ["Open","Actief","Dicht"]
 statcollijst = [colStart,colOpen,colDicht]
-lijstlijst = ["Datum","Functie","Bedrijf","Salaris","Gewijzigd","Status","Contact","Via","Weblink","Notitie"]
-#              0       1         2         3         4           5        6         7     8         9
-#  _    __  __   __
+lijstlijst = ["Datm","Func","Bedr","Loon","Wijz","Stts","Pers","Cont","Webl","Aant"]
+#              0      1      2      3      4      5      6      7      8      9
+#  __   __  __   __
 # / \\ / \\ ||   ||
 #\\__ ||  ||||   ||
 #   \\||  ||||   ||
 #\\__/ \\_/ /\_/|/\_/| niet met me!
 #
 logo = """
-  _    __  __   __  
+  __   __  __   __  
  / \\\\ / \\\\ ||   ||  
 \\\\__ ||  ||||   ||  
    \\\\||  ||||   ||  
 \\\\__/ \\\\_/ /\_/|/\_/| niet met me!"""
-print()
 lenlijst = 0
 try:
     while len(logo) > 0:
@@ -218,13 +217,17 @@ def lsls():
 def rgsoll():
     lijst = lslijst()
     rgs = []
-    Geef = "Geef de index op als geheel getal (\"#\"), inclusief bereik (\":#\", \"#:#\" of \"#:\") of lijst (\"#,#,#\")"
+    Geef = "Geef de index op als geheel getal (#), inclusief bereik (:#, #:# of #:) of lijst (#,#,#)"
     twGeef = textwrap.wrap(Geef, width = 53)
     ix = 0
     while ix < len(twGeef)-1:
         print(twGeef[ix])
         ix += 1
-    details = input(twGeef[-1]+inputindent)
+    if (len(twGeef[-1]) + len(inputindent)) > 53:
+        print(twGeef[-1])
+        details = input(inputindent)
+    else:
+        details = input(twGeef[-1]+inputindent)
     try:
         if ":" in details:
             if len(details) >1 and details[0] == ":":
@@ -257,48 +260,48 @@ def lssoll():
         for i in rgs:
             if i in range(len(lijst)):
                 col = colls
-                lijn = "-"*2+"+"+"-"*9+"+"+"-"*10+" -   -"
+                lijn = "-"*2+"+"+"-"*4+"+"+"-"*44+"+"
                 lijst = lslijst()
                 print(str(i)+":")
                 print(col+lijn+col0)
                 col = col0
                 for j in range(len(lijstlijst)):
                     if j in [1,2,6,7,9]:
-                        if len(lijst[i][j]) > 40:
-                            w = textwrap.wrap(lijst[i][j], width = 40)
+                        if len(lijst[i][j]) > 45:
+                            w = textwrap.wrap(lijst[i][j], width = 45)
                             for k in w:
                                 if k == w[0]:
-                                    print(forc3(j)+forl10(lijstlijst[j])+k)
+                                    print(forc3(j)+forl5(lijstlijst[j])+k)
                                 else:
-                                    print(" "*13+k)
+                                    print(" "*8+k)
                         else:
-                            print(forc3(j)+forl10(lijstlijst[j])+str(lijst[i][j]))
+                            print(forc3(j)+forl5(lijstlijst[j])+str(lijst[i][j]))
                     elif j == 8:
-                        if len(lijst[i][j]) > 40:
+                        if len(lijst[i][j]) > 45:
                             w = lijst[i][j].split("/")
                             for k in w:
                                 if k == w[0]:
-                                    print(forc3(j)+forl10(lijstlijst[j])+k+"/")
-                                elif len(k) > 40:
-                                    l = textwrap.wrap(k, width = 40)
+                                    print(forc3(j)+forl5(lijstlijst[j])+k+"/")
+                                elif len(k) > 45:
+                                    l = textwrap.wrap(k, width = 45)
                                     for m in l:
-                                        print(" "*13+m)
-                                    print(" "*13+"/")
+                                        print(" "*8+m)
+                                    print(" "*8+"/")
                                 else:
-                                    print(" "*13+k+"/")
+                                    print(" "*8+k+"/")
                         else:
-                            print(forc3(j)+forl10(lijstlijst[j])+str(lijst[i][j]))
+                            print(forc3(j)+forl5(lijstlijst[j])+str(lijst[i][j]))
                     else:
                         if j == 5:
                             col = statcollijst[statuslijst.index(lijst[i][j])]
-                            print(forc3(j)+forl10(lijstlijst[j])+col+str(lijst[i][j])+col0)
+                            print(forc3(j)+forl5(lijstlijst[j])+col+str(lijst[i][j])+col0)
                             col = col0
                         elif j == 3:
                             if lijst[i][j] == 0:
                                 lijst[i][j] = ""
-                            print(forc3(j)+forl10(lijstlijst[j])+col+str(lijst[i][j])+col0)
+                            print(forc3(j)+forl5(lijstlijst[j])+col+str(lijst[i][j])+col0)
                         else:
-                            print(forc3(j)+forl10(lijstlijst[j])+col+str(lijst[i][j])+col0)
+                            print(forc3(j)+forl5(lijstlijst[j])+col+str(lijst[i][j])+col0)
                 col = colls
                 print(col+lijn+col0)
         print()
@@ -318,47 +321,47 @@ def chsoll():
         try:
             intd = int(details)
             if intd in range(len(lijst)):
-                lijn = "-"*2+"+"+"-"*9+"+"+"-"*10+" -   -"
+                lijn = "-"*2+"+"+"-"*4+"+"+"-"*44+"+"
                 lijst = lslijst()
                 print(col+lijn+col0)
                 col = col0
                 for j in range(len(lijstlijst)):
                     if j in [1,2,6,7,9]:
-                        if len(lijst[intd][j]) > 40:
-                            w = textwrap.wrap(lijst[intd][j], width = 40)
+                        if len(lijst[intd][j]) > 45:
+                            w = textwrap.wrap(lijst[intd][j], width = 45)
                             for k in w:
                                 if k == w[0]:
-                                    print(forc3(j)+forl10(lijstlijst[j])+k)
+                                    print(forc3(j)+forl5(lijstlijst[j])+k)
                                 else:
-                                    print(" "*13+k)
+                                    print(" "*8+k)
                         else:
-                            print(forc3(j)+forl10(lijstlijst[j])+str(lijst[intd][j]))
+                            print(forc3(j)+forl5(lijstlijst[j])+str(lijst[intd][j]))
                     elif j == 8:
-                        if len(lijst[intd][j]) > 40:
+                        if len(lijst[intd][j]) > 45:
                             w = lijst[intd][j].split("/")
                             for k in w:
                                 if k == w[0]:
-                                    print(forc3(j)+forl10(lijstlijst[j])+k+"/")
-                                elif len(k) > 40:
-                                    l = textwrap.wrap(k, width = 40)
+                                    print(forc3(j)+forl5(lijstlijst[j])+k+"/")
+                                elif len(k) > 45:
+                                    l = textwrap.wrap(k, width = 45)
                                     for m in l:
-                                        print(" "*13+m)
-                                    print(" "*13+"/")
+                                        print(" "*8+m)
+                                    print(" "*8+"/")
                                 else:
-                                    print(" "*13+k+"/")
+                                    print(" "*8+k+"/")
                         else:
-                            print(forc3(j)+forl10(lijstlijst[j])+str(lijst[intd][j]))
+                            print(forc3(j)+forl5(lijstlijst[j])+str(lijst[intd][j]))
                     else:
                         if j == 5:
                             col = statcollijst[statuslijst.index(lijst[intd][j])]
-                            print(forc3(j)+forl10(lijstlijst[j])+col+str(lijst[intd][j])+col0)
+                            print(forc3(j)+forl5(lijstlijst[j])+col+str(lijst[intd][j])+col0)
                             col = col0
                         elif j == 3:
                             if lijst[intd][j] == 0:
                                 lijst[intd][j] = ""
-                            print(forc3(j)+forl10(lijstlijst[j])+col+str(lijst[intd][j])+col0)
+                            print(forc3(j)+forl5(lijstlijst[j])+col+str(lijst[intd][j])+col0)
                         else:
-                            print(forc3(j)+forl10(lijstlijst[j])+col+str(lijst[intd][j])+col0)
+                            print(forc3(j)+forl5(lijstlijst[j])+col+str(lijst[intd][j])+col0)
                 col = colch
                 print(col+lijn+col0)
             if intd in range(len(lijst)):
