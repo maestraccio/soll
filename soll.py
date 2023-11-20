@@ -3,8 +3,8 @@ import ast, os, textwrap
 from datetime import datetime, date, timedelta
 from time import sleep
 
-versie = "0.80"
-datum = "20231108"
+versie = "0.85"
+datum = "20231120"
 plaats = "Pedara"
 
 basismap = os.path.dirname(os.path.realpath(__file__))
@@ -47,7 +47,7 @@ logo = """
 \\\\__/ \\\\__/ /\_/|/\_/| niet met me!"""
 colin = 0
 for i in logo:
-    print(statcollijst[colin]+i+col0, end = "", flush = True)
+    print(statcollijst[colin]+i, end = "", flush = True)
     if colin == len(statcollijst)-1:
         colin = 0
     else:
@@ -437,7 +437,8 @@ def fdsoll():
                     ifd = lijst.index(i)
                     jfd = i.index(j)
                     veld = str(lijstlijst[jfd])
-                    print(" >> %s is gevonden in soll %s:\n%s: %s" % (col+fd+col0, col+str(ifd)+col0, col+veld+col0, j))
+                    statcol = statcollijst[statuslijst.index(i[5])]
+                    print(" >> %s is gevonden in soll %s:\n%s: %s" % (col+fd+col0, statcol+" %s " % str(ifd)+col0, col+veld+col0, j))
     col = col0
     print()
     return lijst
