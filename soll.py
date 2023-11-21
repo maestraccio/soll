@@ -3,8 +3,8 @@ import ast, os, textwrap
 from datetime import datetime, date, timedelta
 from time import sleep
 
-versie = "0.85"
-datum = "20231120"
+versie = "0.90"
+datum = "20231121"
 plaats = "Pedara"
 
 basismap = os.path.dirname(os.path.realpath(__file__))
@@ -193,22 +193,25 @@ def lsls():
     print()
     print(col+lijn+col0)
     for i in range(len(lijst)):
-        print(forc3(str(i)),end = "")
-        for j in range(len(lijstlijst)):
-            if j == 0 or j == 4:
-                dat = str(lijst[i][j])[4:]
-                print(forl5(dat),end = "")
-            elif j == 3:
-                if lijst[i][j] == 0:
-                    lijst[i][j] = ""
-                print(forl5(str(lijst[i][j])[:4]),end = "")
-            elif j == 5:
-                col = statcollijst[statuslijst.index(lijst[i][j])]
-                print(col+forl5(str(lijst[i][j])[:4])+col0,end = "")
-                col = colls
-            else:
-                print(forl5(str(lijst[i][j])[:4]),end = "")
-        print()
+        dat0 = datetime.strptime(lijst[i][0],"%Y%m%d")
+        veertien = (datetime.today() - dat0).days
+        if veertien <= 14 or lijst[i][5] != statuslijst[2] :
+            print(forc3(str(i)),end = "")
+            for j in range(len(lijstlijst)):
+                if j == 0 or j == 4:
+                    dat = str(lijst[i][j])[4:]
+                    print(forl5(dat),end = "")
+                elif j == 3:
+                    if lijst[i][j] == 0:
+                        lijst[i][j] = ""
+                    print(forl5(str(lijst[i][j])[:4]),end = "")
+                elif j == 5:
+                    col = statcollijst[statuslijst.index(lijst[i][j])]
+                    print(col+forl5(str(lijst[i][j])[:4])+col0,end = "")
+                    col = colls
+                else:
+                    print(forl5(str(lijst[i][j])[:4]),end = "")
+            print()
     print(col+lijn+col0)
     col = col0
     return lijst
@@ -305,7 +308,7 @@ def lssoll():
                 print(col+lijn+col0)
         print()
     except(Exception) as f:
-        #print(f)
+        print(f)
         pass
     return lijst
 
