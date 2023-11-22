@@ -3,8 +3,8 @@ import ast, os, textwrap
 from datetime import datetime, date, timedelta
 from time import sleep
 
-versie = "0.90"
-datum = "20231121"
+versie = "0.91"
+datum = "20231122"
 plaats = "Pedara"
 
 basismap = os.path.dirname(os.path.realpath(__file__))
@@ -195,8 +195,11 @@ def lsls():
     for i in range(len(lijst)):
         dat0 = datetime.strptime(lijst[i][0],"%Y%m%d")
         veertien = (datetime.today() - dat0).days
+        coldat = col0
+        if veertien > 14:
+            coldat = colls
         if veertien <= 14 or lijst[i][5] != statuslijst[2] :
-            print(forc3(str(i)),end = "")
+            print(coldat+forc3(str(i))+col0,end = "")
             for j in range(len(lijstlijst)):
                 if j == 0 or j == 4:
                     dat = str(lijst[i][j])[4:]
