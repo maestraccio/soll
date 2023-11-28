@@ -3,8 +3,8 @@ import ast, os, textwrap
 from datetime import datetime, date, timedelta
 from time import sleep
 
-versie = "0.91"
-datum = "20231122"
+versie = "1.00"
+datum = "20231128"
 plaats = "Pedara"
 
 basismap = os.path.dirname(os.path.realpath(__file__))
@@ -29,7 +29,7 @@ colDicht = "\033[96m"+"\033[41m"
 
 inputindent = "  : "
 afsluitlijst = ["X","Q"]
-statuslijst = ["Open","Actief","Dicht"]
+statuslijst = ["Init","Actief","Dicht"]
 statcollijst = [colStart,colOpen,colDicht]
 lijstlijst = ["Datm","Func","Bedr","Loon","Wijz","Stts","Pers","Cont","Webl","Aant"]
 #              0      1      2      3      4      5      6      7      8      9
