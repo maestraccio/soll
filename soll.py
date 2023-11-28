@@ -3,7 +3,7 @@ import ast, os, textwrap
 from datetime import datetime, date, timedelta
 from time import sleep
 
-versie = "1.00"
+versie = "1.01"
 datum = "20231128"
 plaats = "Pedara"
 
@@ -132,11 +132,11 @@ def mksoll():
         if Status.upper() in afsluitlijst:
             return lijst
         elif Status == "":
-            Status = "0"
+            Status = 0
         try:
             ints = int(Status)
             if ints in range(len(statuslijst)):
-                Status = statuslijst[ints]
+                Status = ints
                 status = False
             else:
                 pass
@@ -209,8 +209,8 @@ def lsls():
                         lijst[i][j] = ""
                     print(forl5(str(lijst[i][j])[:4]),end = "")
                 elif j == 5:
-                    col = statcollijst[statuslijst.index(lijst[i][j])]
-                    print(col+forl5(str(lijst[i][j])[:4])+col0,end = "")
+                    col = statcollijst[lijst[i][j]]
+                    print(col+forl5(statuslijst[lijst[i][j]][:4])+col0,end = "")
                     col = colls
                 else:
                     print(forl5(str(lijst[i][j])[:4]),end = "")
@@ -298,8 +298,8 @@ def lssoll():
                             print(forc3(j)+forl5(lijstlijst[j])+str(lijst[i][j]))
                     else:
                         if j == 5:
-                            col = statcollijst[statuslijst.index(lijst[i][j])]
-                            print(forc3(j)+forl5(lijstlijst[j])+col+str(lijst[i][j])+col0)
+                            col = statcollijst[lijst[i][j]]
+                            print(forc3(j)+forl5(lijstlijst[j])+col+str(statuslijst[lijst[i][j]])+col0)
                             col = col0
                         elif j == 3:
                             if lijst[i][j] == 0:
@@ -358,8 +358,8 @@ def chsoll():
                             print(forc3(j)+forl5(lijstlijst[j])+str(lijst[intd][j]))
                     else:
                         if j == 5:
-                            col = statcollijst[statuslijst.index(lijst[intd][j])]
-                            print(forc3(j)+forl5(lijstlijst[j])+col+str(lijst[intd][j])+col0)
+                            col = statcollijst[lijst[intd][j]]
+                            print(forc3(j)+forl5(lijstlijst[j])+col+str(statuslijst[lijst[intd][j]])+col0)
                             col = col0
                         elif j == 3:
                             if lijst[intd][j] == 0:
@@ -384,7 +384,7 @@ def chsoll():
                                 return lijst
                             try:
                                 if int(Status) in range(len(statuslijst)):
-                                    wijz = statuslijst[int(Status)]
+                                    wijz = int(Status)
                                 else:
                                     pass
                             except:
@@ -443,7 +443,7 @@ def fdsoll():
                     ifd = lijst.index(i)
                     jfd = i.index(j)
                     veld = str(lijstlijst[jfd])
-                    statcol = statcollijst[statuslijst.index(i[5])]
+                    statcol = statcollijst[i[5]]
                     print(" >> %s is gevonden in soll %s:\n%s: %s" % (col+fd+col0, statcol+" %s " % str(ifd)+col0, col+veld+col0, j))
     col = col0
     print()
