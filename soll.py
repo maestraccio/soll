@@ -3,7 +3,7 @@ import ast, os, textwrap
 from datetime import datetime, date, timedelta
 from time import sleep
 
-versie = "1.01"
+versie = "1.02"
 datum = "20231128"
 plaats = "Pedara"
 
@@ -198,7 +198,7 @@ def lsls():
         coldat = col0
         if veertien > 14:
             coldat = colls
-        if veertien <= 14 or lijst[i][5] != statuslijst[2] :
+        if veertien <= 14 or lijst[i][5] != 2:
             print(coldat+forc3(str(i))+col0,end = "")
             for j in range(len(lijstlijst)):
                 if j == 0 or j == 4:
