@@ -3,8 +3,8 @@ import ast, os, textwrap
 from datetime import datetime, date, timedelta
 from time import sleep
 
-versie = "1.02"
-datum = "20231128"
+versie = "1.05"
+datum = "20231201"
 plaats = "Pedara"
 
 basismap = os.path.dirname(os.path.realpath(__file__))
